@@ -1,6 +1,15 @@
 import { Request, Response } from "express";
 import { URL, URLDocument } from "../models/url_model";
 
+const getAllUrls = async (req: Request, res: Response) => {
+    try {
+        const urls = await URL.find();
+        return res.status(200).json({ urls });
+    } catch (error:any) {
+        return res.status(500).json({ error: error.message });
+    }
+};
+
 const createShortURL = async (req: Request, res: Response) => {
     try {
         const { originalURL } = req.body;
@@ -11,7 +20,7 @@ const createShortURL = async (req: Request, res: Response) => {
 
         const urlID = Math.random().toString(36).substr(2, 5);
 
-        const generateNewShortURL = new URL({
+        const generateNewShortURL = await URL.create({
             urlID,
             originalURL,
             info: []
@@ -43,6 +52,11 @@ const loadShortURL = async (req: Request, res: Response) => {
             }
         );
 
+        // const getURL = await URL.findOne({ urlID });
+
+        console.log("getURL", getURL);
+        
+
         if (!getURL) {
             return res.status(404).json({ message: "URL not found" });
         }
@@ -54,4 +68,4 @@ const loadShortURL = async (req: Request, res: Response) => {
     }
 };
 
-export { createShortURL, loadShortURL };
+export { createShortURL, loadShortURL, getAllUrls };
