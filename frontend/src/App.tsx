@@ -24,7 +24,7 @@ function App() {
     console.log('resp', data.generateNewShortURL["urlID"]);
 
     if(resp.status === 201) {
-      setGeneratedUrl(`http://localhost:8000/url/${data.generateNewShortURL["urlID"]}`);
+      setGeneratedUrl(`https://urshort-1.onrender.com/url/${data.generateNewShortURL["urlID"]}`);
       toast.success('URL shortened successfully');
     }
     else{
