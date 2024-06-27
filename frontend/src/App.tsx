@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
@@ -15,7 +15,7 @@ function App() {
       return;
     }
 
-    const resp = await axios.post('http://localhost:8000/create-url', {
+    const resp = await axios.post('https://urshort-1.onrender.com/create-url', {
       originalURL: inputUrl
     });
 
